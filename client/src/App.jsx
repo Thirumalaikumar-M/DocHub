@@ -1,7 +1,11 @@
-import React from "react";
+import TextEditor from "./TextEditor";
 
 function App() {
-  return <></>;
+  return (
+    <>
+      <TextEditor />
+    </>
+  );
 }
 
 export default App;
