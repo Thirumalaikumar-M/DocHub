@@ -10,12 +10,15 @@ const PORT = 3001;
 
 io.on("connection", (socket) => {
   console.log("New client connected");
+  socket.on("send-changes", (delta) => {
+    socket.broadcast.emit("receive-changes", delta);
+  });
 
   socket.on("disconnect", () => {
     console.log("Client disconnected");
   });
 });
 
-server.listen(PORT, () => {
-  console.log(`Server is running on PORT: ${PORT}`);
-});
+// server.listen(PORT, () => {
+//   console.log(`Server is running on PORT: ${PORT}`);
+// });
