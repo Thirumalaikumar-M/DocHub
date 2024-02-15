@@ -1,13 +1,21 @@
 import express from "express";
+import http, { Server } from "http";
+import { Server as socketIo } from "socket.io";
 
 const app = express();
+const server = http.createServer(app);
+const io = new socketIo(server);
 
 const PORT = 3001;
 
-app.get("/", (req, res) => {
-  console.log(req);
-  res.status(200).send("Basic Server setup");
+io.on("connection", (socket) => {
+  console.log("New client connected");
+
+  socket.on("disconnect", () => {
+    console.log("Client disconnected");
+  });
 });
-app.listen(PORT, () => {
+
+server.listen(PORT, () => {
   console.log(`Server is running on PORT: ${PORT}`);
 });
